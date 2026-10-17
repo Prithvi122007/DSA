@@ -1,0 +1,34 @@
+class Solution {
+    public boolean validPath(int n, int[][] edges, int source, int destination) {
+        List<List<Integer>> graph = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            graph.add(new ArrayList<>());
+        }
+        for (int[] e : edges) {
+            graph.get(e[0]).add(e[1]);   // undirected, so add both ways
+            graph.get(e[1]).add(e[0]);
+        }
+
+        // 2. BFS
+        boolean[] visited = new boolean[n];
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(source);
+        visited[source] = true;
+
+        while (!queue.isEmpty()) {
+            int curr = queue.poll();
+
+            if (curr == destination) {
+                return true;
+            }
+
+            for (int next : graph.get(curr)) {
+                if (!visited[next]) {
+                    visited[next] = true;
+                    queue.add(next);
+                }
+            }
+        }
+        return false;
+    }
+}
