@@ -5,11 +5,10 @@ class Solution {
             graph.add(new ArrayList<>());
         }
         for (int[] e : edges) {
-            graph.get(e[0]).add(e[1]);   // undirected, so add both ways
+            graph.get(e[0]).add(e[1]);   
             graph.get(e[1]).add(e[0]);
         }
 
-        // 2. BFS
         boolean[] visited = new boolean[n];
         Queue<Integer> queue = new LinkedList<>();
         queue.add(source);
